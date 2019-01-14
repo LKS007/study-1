@@ -14,19 +14,13 @@ module Exercise
       # Написать свою функцию my_map
       def my_map
         new_map_array = MyArray.new
-        for x in self
-          new_map_array.push(yield(x))
-        end
-        new_map_array
+        my_reduce(new_map_array) { |acc, x| acc << yield(x) }
       end
 
       # Написать свою функцию my_compact
       def my_compact
         new_compact_array = MyArray.new
-        for x in self
-          new_compact_array.push(x) unless x.nil?
-        end
-        new_compact_array
+        my_reduce(new_compact_array) { |acc, x| x.nil? ? acc : acc << x }
       end
 
       # Написать свою функцию my_reduce
